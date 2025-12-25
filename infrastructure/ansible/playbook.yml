@@ -1,0 +1,26 @@
+---
+- name: Setup Local Dev Environment
+  hosts: local
+  gather_facts: false
+  tasks:
+    - name: Ensure kubectl is installed
+      command: kubectl version --client
+      register: kubectl_check
+      ignore_errors: true
+      changed_when: false
+
+    - name: Print kubectl version
+      debug:
+        msg: "kubectl is installed: {{ kubectl_check.stdout }}"
+      when: kubectl_check.rc == 0
+
+    - name: Ensure Helm is installed
+      command: helm version
+      register: helm_check
+      ignore_errors: true
+      changed_when: false
+
+    - name: Print Helm version
+      debug:
+        msg: "Helm is installed: {{ helm_check.stdout }}"
+      when: helm_check.rc == 0

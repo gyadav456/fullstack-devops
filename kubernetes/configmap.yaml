@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: task-manager
+data:
+  FLASK_ENV: "production"
+  DATABASE_HOST: "task-manager-db.c012345abcdef.us-east-1.rds.amazonaws.com"

@@ -1,0 +1,2803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce DevOps Project</title>
+    <style>
+:root {
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15), inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  }
+}
+
+html {
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h1 { font-size: var(--font-size-4xl); }
+h2 { font-size: var(--font-size-3xl); }
+h3 { font-size: var(--font-size-2xl); }
+h4 { font-size: var(--font-size-xl); }
+h5 { font-size: var(--font-size-lg); }
+h6 { font-size: var(--font-size-md); }
+
+p { margin: 0 0 var(--space-16) 0; }
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+a:hover { color: var(--color-primary-hover); }
+
+code, pre {
+  font-family: var(--font-family-mono);
+  font-size: calc(var(--font-size-base) * 0.95);
+  background-color: var(--color-secondary);
+  border-radius: var(--radius-sm);
+}
+
+code { padding: var(--space-1) var(--space-4); }
+
+pre {
+  padding: var(--space-16);
+  margin: var(--space-16) 0;
+  overflow: auto;
+  border: 1px solid var(--color-border);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  border: none;
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn--secondary {
+  background: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.btn--secondary:hover {
+  background: var(--color-secondary-hover);
+}
+
+.btn--sm {
+  padding: var(--space-4) var(--space-12);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-sm);
+}
+
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card__body {
+  padding: var(--space-16);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-6) var(--space-12);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.status--success {
+  background-color: rgba(var(--color-teal-500-rgb), 0.15);
+  color: var(--color-success);
+  border: 1px solid rgba(var(--color-teal-500-rgb), 0.25);
+}
+
+.status--error {
+  background-color: rgba(var(--color-red-500-rgb), 0.15);
+  color: var(--color-error);
+  border: 1px solid rgba(var(--color-red-500-rgb), 0.25);
+}
+
+.status--warning {
+  background-color: rgba(var(--color-orange-500-rgb), 0.15);
+  color: var(--color-warning);
+  border: 1px solid rgba(var(--color-orange-500-rgb), 0.25);
+}
+
+.status--info {
+  background-color: rgba(var(--color-slate-500-rgb), 0.15);
+  color: var(--color-info);
+  border: 1px solid rgba(var(--color-slate-500-rgb), 0.25);
+}
+
+.header {
+  background: var(--color-bg-1);
+  padding: var(--space-24) 0;
+  text-align: center;
+}
+
+.nav {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-16) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--space-16);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-24);
+  flex-wrap: wrap;
+}
+
+.nav-item a {
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.nav-item a:hover {
+  color: var(--color-primary);
+}
+
+.main-content {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: var(--space-32) var(--space-16);
+}
+
+.section {
+  margin-bottom: var(--space-32);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-24);
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.code-block {
+  background: var(--color-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  padding: var(--space-16);
+  overflow-x: auto;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+}
+
+.tab-container {
+  margin-bottom: var(--space-24);
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-16);
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: var(--space-12) var(--space-16);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+  border-bottom: 2px solid transparent;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.tab:hover {
+  color: var(--color-text);
+}
+
+.tab.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-16);
+  margin: var(--space-24) 0;
+}
+
+.service-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-16);
+}
+
+.service-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-bottom: var(--space-12);
+  flex-wrap: wrap;
+}
+
+.service-icon {
+  width: 24px;
+  height: 24px;
+  background: var(--color-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: var(--font-size-sm);
+  flex-shrink: 0;
+}
+
+.endpoint-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-12) 0 0 0;
+}
+
+.endpoint-list li {
+  padding: var(--space-4) 0;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  margin: var(--space-16) 0;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  background: var(--color-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.toc {
+  background: var(--color-bg-3);
+  padding: var(--space-16);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-32);
+}
+
+.toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc li {
+  padding: var(--space-4) 0;
+}
+
+.toc a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.toc a:hover {
+  color: var(--color-primary);
+}
+
+.highlight {
+  background: var(--color-bg-2);
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.hidden {
+  display: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-8 {
+  gap: var(--space-8);
+}
+
+.mb-16 {
+  margin-bottom: var(--space-16);
+}
+
+.mt-24 {
+  margin-top: var(--space-24);
+}
+
+@media (max-width: 768px) {
+  .nav-menu {
+    gap: var(--space-12);
+  }
+  
+  .nav-item a {
+    font-size: var(--font-size-sm);
+  }
+  
+  .service-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .grid-2, .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="main-content">
+            <h1>🚀 E-Commerce DevOps Project</h1>
+            <p>Complete microservices architecture with CI/CD, monitoring, and security</p>
+            <div class="flex items-center justify-center gap-8 mt-24">
+                <span class="status status--success">Production Ready</span>
+                <span class="status status--info">Kubernetes</span>
+                <span class="status status--warning">AWS</span>
+            </div>
+        </div>
+    </div>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-menu">
+                <div class="nav-item"><a href="#overview" onclick="showSection('overview')">Overview</a></div>
+                <div class="nav-item"><a href="#architecture" onclick="showSection('architecture')">Architecture</a></div>
+                <div class="nav-item"><a href="#services" onclick="showSection('services')">Services</a></div>
+                <div class="nav-item"><a href="#infrastructure" onclick="showSection('infrastructure')">Infrastructure</a></div>
+                <div class="nav-item"><a href="#cicd" onclick="showSection('cicd')">CI/CD</a></div>
+                <div class="nav-item"><a href="#monitoring" onclick="showSection('monitoring')">Monitoring</a></div>
+                <div class="nav-item"><a href="#security" onclick="showSection('security')">Security</a></div>
+                <div class="nav-item"><a href="#setup" onclick="showSection('setup')">Setup Guide</a></div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Overview Section -->
+        <div id="overview" class="section">
+            <h2>📋 Complete DevOps Project Documentation</h2>
+            
+            <div class="toc">
+                <h3>📚 Project Contents</h3>
+                <ul>
+                    <li><a href="#architecture">🏗️ System Architecture &amp; Design</a></li>
+                    <li><a href="#services">⚙️ Microservices Implementation</a></li>
+                    <li><a href="#infrastructure">🌐 Infrastructure as Code</a></li>
+                    <li><a href="#cicd">🔄 CI/CD Pipeline &amp; Automation</a></li>
+                    <li><a href="#monitoring">📊 Monitoring &amp; Observability</a></li>
+                    <li><a href="#security">🔒 Security &amp; Compliance</a></li>
+                    <li><a href="#setup">🚀 Complete Setup Guide</a></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <div class="card__body">
+                    <h3>🎯 What This Project Demonstrates</h3>
+                    <p>This comprehensive DevOps project showcases a production-ready e-commerce microservices application that demonstrates industry best practices across the entire software development lifecycle:</p>
+                    
+                    <div class="grid grid-2 mt-24">
+                        <div>
+                            <h4>🏢 Enterprise Architecture</h4>
+                            <ul>
+                                <li><strong>Microservices:</strong> User, Product, and Order services with API Gateway</li>
+                                <li><strong>Polyglot Development:</strong> Node.js and Python Flask services</li>
+                                <li><strong>Database Strategy:</strong> MongoDB, PostgreSQL, and MySQL per service</li>
+                                <li><strong>API Gateway:</strong> Nginx-based routing and load balancing</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>☁️ Cloud Infrastructure</h4>
+                            <ul>
+                                <li><strong>AWS Cloud:</strong> VPC, EKS, RDS, ALB, S3, IAM</li>
+                                <li><strong>Containerization:</strong> Docker multi-stage builds</li>
+                                <li><strong>Orchestration:</strong> Kubernetes with Helm charts</li>
+                                <li><strong>Infrastructure as Code:</strong> Terraform and Ansible</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-2 mt-24">
+                <div class="card">
+                    <div class="card__body">
+                        <h4>🔄 DevOps Automation</h4>
+                        <ul>
+                            <li><strong>CI/CD Pipelines:</strong> Jenkins and GitHub Actions</li>
+                            <li><strong>Automated Testing:</strong> Unit, integration, and E2E tests</li>
+                            <li><strong>Quality Gates:</strong> Code coverage, security scans</li>
+                            <li><strong>Deployment:</strong> Blue-green and rolling deployments</li>
+                            <li><strong>Rollback:</strong> Automated failure detection and recovery</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__body">
+                        <h4>📊 Observability Stack</h4>
+                        <ul>
+                            <li><strong>Metrics:</strong> Prometheus with custom business metrics</li>
+                            <li><strong>Visualization:</strong> Grafana dashboards and alerts</li>
+                            <li><strong>Logging:</strong> ELK Stack (Elasticsearch, Logstash, Kibana)</li>
+                            <li><strong>Tracing:</strong> Distributed tracing across services</li>
+                            <li><strong>Health Checks:</strong> Liveness and readiness probes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-24">
+                <div class="card__body">
+                    <h3>🛡️ Security Implementation</h3>
+                    <div class="grid grid-3">
+                        <div>
+                            <h4>📊 Code Quality</h4>
+                            <ul>
+                                <li>SonarQube analysis</li>
+                                <li>Code coverage reports</li>
+                                <li>Security hotspot detection</li>
+                                <li>Technical debt tracking</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>🔍 Vulnerability Scanning</h4>
+                            <ul>
+                                <li>Trivy container scanning</li>
+                                <li>OWASP dependency check</li>
+                                <li>Runtime security monitoring</li>
+                                <li>Network policy enforcement</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4>🔐 Secrets Management</h4>
+                            <ul>
+                                <li>HashiCorp Vault integration</li>
+                                <li>Kubernetes secrets</li>
+                                <li>Environment variable injection</li>
+                                <li>Certificate management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-24">
+                <div class="card__body">
+                    <h3>📁 Complete Project Structure</h3>
+                    <div class="code-block">
+                        <pre>
+ecommerce-devops/
+├── README.md                     # Complete project documentation
+├── docker-compose.yml            # Local development environment
+├── .gitignore                    # Git ignore patterns
+├── .env.example                  # Environment template
+├── Jenkinsfile                   # Jenkins pipeline configuration
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml            # GitHub Actions workflow
+├── services/                     # Microservices implementation
+│   ├── user-service/            # Node.js user management
+│   ├── product-service/         # Python product catalog
+│   ├── order-service/           # Node.js order processing
+│   └── api-gateway/             # Nginx API gateway
+├── infrastructure/               # Infrastructure as Code
+│   ├── terraform/               # AWS resource provisioning
+│   ├── ansible/                 # Configuration management
+│   └── kubernetes/              # K8s manifests and Helm charts
+├── monitoring/                   # Observability stack
+│   ├── prometheus/              # Metrics collection
+│   ├── grafana/                 # Visualization dashboards
+│   └── elk/                     # Logging infrastructure
+├── security/                     # Security tools and policies
+│   ├── sonarqube/              # Code quality analysis
+│   ├── trivy/                   # Vulnerability scanning
+│   └── vault/                   # Secrets management
+├── testing/                      # Test automation
+│   ├── unit-tests/             # Service unit tests
+│   ├── integration-tests/      # API integration tests
+│   └── load-tests/             # Performance testing
+└── docs/                        # Additional documentation
+    ├── architecture/            # System design documents
+    ├── setup-guides/           # Environment setup
+    └── troubleshooting/        # Common issues and solutions
+                        </pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture Section -->
+        <div id="architecture" class="section hidden">
+            <h2>🏗️ System Architecture</h2>
+            
+            <div class="card">
+                <div class="card__body">
+                    <h3>🌐 Microservices Architecture Overview</h3>
+                    <div class="code-block">
+                        <pre>
+┌─────────────────────┐    ┌─────────────────────┐    ┌─────────────────────┐
+│    Load Balancer    │────│     API Gateway     │────│   External APIs     │
+│       (ALB)         │    │      (Nginx)        │    │                     │
+└─────────────────────┘    └─────────────────────┘    └─────────────────────┘
+                                      │
+              ┌───────────────────────┼───────────────────────┐
+              │                       │                       │
+      ┌───────────────┐      ┌─────────────┐      ┌─────────────┐
+      │ User Service  │      │Product Svc  │      │Order Service│
+      │   (Node.js)   │      │  (Python)   │      │  (Node.js)  │
+      │   Port: 3001  │      │Port: 3002   │      │ Port: 3003  │
+      └───────────────┘      └─────────────┘      └─────────────┘
+              │                       │                       │
+      ┌───────────────┐      ┌─────────────┐      ┌─────────────┐
+      │   MongoDB     │      │ PostgreSQL  │      │    MySQL    │
+      │   (Users)     │      │ (Products)  │      │  (Orders)   │
+      └───────────────┘      └─────────────┘      └─────────────┘
+                        </pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-2 mt-24">
+                <div class="card">
+                    <div class="card__body">
+                        <h4>🌐 Network Architecture</h4>
+                        <ul>
+                            <li><strong>VPC Design:</strong> Isolated network with public/private subnets across multiple AZs</li>
+                            <li><strong>Load Balancing:</strong> Application Load Balancer with health checks</li>
+                            <li><strong>API Gateway:</strong> Nginx-based routing, rate limiting, and SSL termination</li>
+                            <li><strong>Service Mesh:</strong> Internal service-to-service communication</li>
+                            <li><strong>Security Groups:</strong> Fine-grained firewall rules per service</li>
+                            <li><strong>DNS Management:</strong> Route53 integration for service discovery</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__body">
+                        <h4>💾 Data Architecture</h4>
+                        <ul>
+                            <li><strong>Database per Service:</strong> Isolated data stores ensuring loose coupling</li>
+                            <li><strong>MongoDB:</strong> Document store for flexible user profiles and preferences</li>
+                            <li><strong>PostgreSQL:</strong> Relational database for complex product catalogs</li>
+                            <li><strong>MySQL:</strong> ACID compliance for critical order transactions</li>
+                            <li><strong>Backup Strategy:</strong> Automated backups, point-in-time recovery</li>
+                            <li><strong>Data Synchronization:</strong> Event-driven data consistency</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-24">
+                <div class="card__body">
+                    <h3>🔄 DevOps Pipeline Flow</h3>
+                    <div class="flow-step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <strong>Code Commit</strong><br>
+                            Developer pushes code changes to Git repository (GitHub/GitLab)
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <strong>CI Pipeline Trigger</strong><br>
+                            Webhook triggers Jenkins/GitHub Actions for automated testing
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <strong>Quality & Security Gates</strong><br>
+                            SonarQube code analysis, Trivy security scanning, unit tests
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-number">4</div>
+                        <div>
+                            <strong>Container Build</strong><br>
+                            Multi-stage Docker builds optimized for security and size
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-number">5</div>
+                        <div>
+                            <strong>Infrastructure Provisioning</strong><br>
+                            Terraform applies infrastructure changes, Ansible configures servers
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-number">6</div>
+                        <div>
+                            <strong>Kubernetes Deployment</strong><br>
+                            Helm charts deploy services with rolling updates and health checks
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-number">7</div>
+                        <div>
+                            <strong>Monitoring & Alerting</strong><br>
+                            Prometheus monitors health, Grafana visualizes metrics, alerts notify team
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <div id="services" class="section hidden">
+            <h2>⚙️ Microservices Implementation</h2>
+            
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">U</div>
+                        <h4>User Service</h4>
+                        <span class="status status--info">Node.js</span>
+                    </div>
+                    <p><strong>Port:</strong> 3001 | <strong>Database:</strong> MongoDB</p>
+                    <p>Manages user authentication, registration, profiles, and preferences. Includes JWT token management and OAuth2 integration.</p>
+                    <ul class="endpoint-list">
+                        <li>GET /api/users - List users with pagination</li>
+                        <li>POST /api/users - Create new user account</li>
+                        <li>GET /api/users/:id - Get user profile</li>
+                        <li>PUT /api/users/:id - Update user information</li>
+                        <li>DELETE /api/users/:id - Deactivate user</li>
+                        <li>POST /api/auth/login - User authentication</li>
+                        <li>POST /api/auth/refresh - Token refresh</li>
+                        <li>GET /api/users/me - Current user profile</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">P</div>
+                        <h4>Product Service</h4>
+                        <span class="status status--success">Python Flask</span>
+                    </div>
+                    <p><strong>Port:</strong> 3002 | <strong>Database:</strong> PostgreSQL</p>
+                    <p>Handles product catalog management, inventory tracking, pricing, search, and recommendation engine integration.</p>
+                    <ul class="endpoint-list">
+                        <li>GET /api/products - Product catalog with filters</li>
+                        <li>POST /api/products - Add new product</li>
+                        <li>GET /api/products/:id - Product details</li>
+                        <li>PUT /api/products/:id - Update product info</li>
+                        <li>DELETE /api/products/:id - Remove product</li>
+                        <li>GET /api/products/search - Advanced search</li>
+                        <li>GET /api/categories - Product categories</li>
+                        <li>GET /api/products/recommendations - AI recommendations</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">O</div>
+                        <h4>Order Service</h4>
+                        <span class="status status--info">Node.js</span>
+                    </div>
+                    <p><strong>Port:</strong> 3003 | <strong>Database:</strong> MySQL</p>
+                    <p>Processes orders, handles payments, manages shopping carts, tracks shipments, and integrates with external payment gateways.</p>
+                    <ul class="endpoint-list">
+                        <li>GET /api/orders - Order history with status</li>
+                        <li>POST /api/orders - Create new order</li>
+                        <li>GET /api/orders/:id - Order details</li>
+                        <li>PUT /api/orders/:id/status - Update order status</li>
+                        <li>POST /api/orders/:id/cancel - Cancel order</li>
+                        <li>GET /api/orders/user/:userId - User orders</li>
+                        <li>POST /api/payments - Process payment</li>
+                        <li>GET /api/cart/:userId - Shopping cart</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-icon">G</div>
+                        <h4>API Gateway</h4>
+                        <span class="status status--warning">Nginx</span>
+                    </div>
+                    <p><strong>Port:</strong> 80/443 | <strong>Load Balancer</strong></p>
+                    <p>Central entry point handling authentication, routing, rate limiting, CORS, request/response transformation, and API versioning.</p>
+                    <ul class="endpoint-list">
+                        <li>JWT token validation middleware</li>
+                        <li>Rate limiting (100 req/min per user)</li>
+                        <li>Request routing to microservices</li>
+                        <li>SSL/TLS termination &amp; HSTS</li>
+                        <li>CORS policy management</li>
+                        <li>Request/response logging</li>
+                        <li>Circuit breaker pattern</li>
+                        <li>Health check aggregation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mt-24">
+                <div class="card__body">
+                    <h3>📁 Service Implementation Examples</h3>
+                    <div class="tab-container">
+                        <div class="tabs">
+                            <button class="tab active" onclick="showTab('user-service-code')">User Service Code</button>
+                            <button class="tab" onclick="showTab('product-service-code')">Product Service Code</button>
+                            <button class="tab" onclick="showTab('docker-config')">Docker Configuration</button>
+                            <button class="tab" onclick="showTab('k8s-manifests')">Kubernetes Manifests</button>
+                        </div>
+                        
+                        <div id="user-service-code" class="tab-content active">
+                            <div class="code-block">
+                                <pre>
+// services/user-service/src/app.js
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
+const { logger } = require('./utils/logger');
+const { connectDB } = require('./utils/database');
+const healthCheck = require('./middleware/healthCheck');
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+// Security middleware
+app.use(helmet());
+app.use(cors({
+  origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:3000'],
+  credentials: true
+}));
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP'
+});
+app.use('/api', limiter);
+
+// Body parsing middleware
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
+
+// Health check endpoints
+app.use('/health', healthCheck);
+app.use('/ready', (req, res) => {
+  const dbState = mongoose.connection.readyState;
+  if (dbState === 1) {
+    res.status(200).json({ status: 'ready', database: 'connected' });
+  } else {
+    res.status(503).json({ status: 'not ready', database: 'disconnected' });
+  }
+});
+
+// Prometheus metrics endpoint
+app.get('/metrics', require('./middleware/metrics'));
+
+// API routes
+app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
+
+// Error handling middleware
+app.use((error, req, res, next) => {
+  logger.error('Unhandled error:', error);
+  res.status(500).json({
+    error: 'Internal server error',
+    requestId: req.id
+  });
+});
+
+// 404 handler
+app.use('*', (req, res) => {
+  res.status(404).json({ error: 'Route not found' });
+});
+
+// Database connection and server startup
+async function startServer() {
+  try {
+    await connectDB();
+    logger.info('Connected to MongoDB');
+    
+    app.listen(PORT, () => {
+      logger.info(`User service running on port ${PORT}`);
+    });
+  } catch (error) {
+    logger.error('Failed to start server:', error);
+    process.exit(1);
+  }
+}
+
+// Graceful shutdown
+process.on('SIGTERM', async () => {
+  logger.info('SIGTERM received, shutting down gracefully');
+  await mongoose.connection.close();
+  process.exit(0);
+});
+
+startServer();
+
+module.exports = app;
+                                </pre>
+                            </div>
+                        </div>
+                        
+                        <div id="product-service-code" class="tab-content">
+                            <div class="code-block">
+                                <pre>
+# services/product-service/app/__init__.py
+from flask import Flask, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_cors import CORS
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+import logging
+import os
+
+db = SQLAlchemy()
+migrate = Migrate()
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["100 per hour"]
+)
+
+def create_app():
+    app = Flask(__name__)
+    
+    # Configuration
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv(
+        'DATABASE_URL', 
+        'postgresql://postgres:password@localhost:5432/ecommerce_products'
+    )
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key')
+    
+    # Initialize extensions
+    db.init_app(app)
+    migrate.init_app(app, db)
+    CORS(app, origins=os.getenv('ALLOWED_ORIGINS', 'http://localhost:3000').split(','))
+    limiter.init_app(app)
+    
+    # Logging configuration
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger(__name__)
+    
+    # Health check endpoints
+    @app.route('/health', methods=['GET'])
+    def health_check():
+        try:
+            # Check database connection
+            db.session.execute('SELECT 1')
+            return jsonify({
+                'status': 'healthy',
+                'service': 'product-service',
+                'version': '1.0.0',
+                'database': 'connected'
+            }), 200
+        except Exception as e:
+            logger.error(f"Health check failed: {e}")
+            return jsonify({
+                'status': 'unhealthy',
+                'error': str(e)
+            }), 503
+    
+    @app.route('/ready', methods=['GET'])
+    def readiness_check():
+        try:
+            # Perform readiness checks
+            db.session.execute('SELECT COUNT(*) FROM products')
+            return jsonify({
+                'status': 'ready',
+                'service': 'product-service'
+            }), 200
+        except Exception as e:
+            return jsonify({
+                'status': 'not ready',
+                'error': str(e)
+            }), 503
+    
+    @app.route('/metrics', methods=['GET'])
+    def metrics():
+        # Prometheus metrics endpoint
+        from .utils.metrics import generate_metrics
+        return generate_metrics(), 200, {'Content-Type': 'text/plain'}
+    
+    # Register blueprints
+    from .routes.product_routes import products_bp
+    app.register_blueprint(products_bp, url_prefix='/api')
+    
+    # Error handlers
+    @app.errorhandler(404)
+    def not_found(error):
+        return jsonify({'error': 'Resource not found'}), 404
+    
+    @app.errorhandler(500)
+    def internal_error(error):
+        logger.error(f"Internal server error: {error}")
+        db.session.rollback()
+        return jsonify({'error': 'Internal server error'}), 500
+    
+    @app.errorhandler(429)
+    def ratelimit_handler(e):
+        return jsonify({'error': 'Rate limit exceeded', 'retry_after': str(e.retry_after)}), 429
+    
+    return app
+
+# services/product-service/run.py
+from app import create_app, db
+import os
+
+app = create_app()
+
+if __name__ == '__main__':
+    with app.app_context():
+        # Create tables if they don't exist
+        db.create_all()
+    
+    port = int(os.getenv('PORT', 3002))
+    debug = os.getenv('FLASK_ENV') == 'development'
+    
+    app.run(
+        host='0.0.0.0',
+        port=port,
+        debug=debug,
+        threaded=True
+    )
+                                </pre>
+                            </div>
+                        </div>
+                        
+                        <div id="docker-config" class="tab-content">
+                            <div class="code-block">
+                                <pre>
+# services/user-service/Dockerfile
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+RUN npm ci --only=production && npm cache clean --force
+
+# Production stage
+FROM node:18-alpine AS production
+
+# Install security updates
+RUN apk update && apk upgrade && apk add --no-cache dumb-init
+
+# Create app directory
+WORKDIR /app
+
+# Create non-root user
+RUN addgroup -g 1001 -S nodejs && adduser -S nodeuser -u 1001
+
+# Copy dependencies and source code
+COPY --from=builder /app/node_modules ./node_modules
+COPY --chown=nodeuser:nodejs . .
+
+# Set permissions
+RUN chown -R nodeuser:nodejs /app
+
+# Switch to non-root user
+USER nodeuser
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:3001/health || exit 1
+
+# Expose port
+EXPOSE 3001
+
+# Use dumb-init to handle signals properly
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["node", "src/app.js"]
+
+# services/product-service/Dockerfile
+FROM python:3.11-slim AS builder
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements and install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir --user -r requirements.txt
+
+# Production stage
+FROM python:3.11-slim AS production
+
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y \
+    libpq5 \
+    curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Create non-root user
+RUN useradd --create-home --shell /bin/bash appuser
+
+WORKDIR /app
+
+# Copy Python dependencies from builder
+COPY --from=builder /root/.local /home/appuser/.local
+
+# Copy application code
+COPY --chown=appuser:appuser . .
+
+# Switch to non-root user
+USER appuser
+
+# Update PATH to include local bin
+ENV PATH=/home/appuser/.local/bin:$PATH
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:3002/health || exit 1
+
+# Expose port
+EXPOSE 3002
+
+CMD ["python", "run.py"]
+
+# docker-compose.yml for local development
+version: '3.8'
+
+services:
+  user-service:
+    build: ./services/user-service
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=mongodb
+      - DB_NAME=ecommerce_users
+    depends_on:
+      - mongodb
+    volumes:
+      - ./services/user-service:/app
+      - /app/node_modules
+    networks:
+      - ecommerce-network
+
+  product-service:
+    build: ./services/product-service
+    ports:
+      - "3002:3002"
+    environment:
+      - FLASK_ENV=development
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/ecommerce_products
+    depends_on:
+      - postgres
+    volumes:
+      - ./services/product-service:/app
+    networks:
+      - ecommerce-network
+
+  order-service:
+    build: ./services/order-service
+    ports:
+      - "3003:3003"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=mysql
+      - DB_NAME=ecommerce_orders
+    depends_on:
+      - mysql
+    volumes:
+      - ./services/order-service:/app
+      - /app/node_modules
+    networks:
+      - ecommerce-network
+
+  mongodb:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - ecommerce-network
+
+  postgres:
+    image: postgres:15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=ecommerce_products
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ecommerce-network
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=ecommerce_orders
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - ecommerce-network
+
+volumes:
+  mongodb_data:
+  postgres_data:
+  mysql_data:
+
+networks:
+  ecommerce-network:
+    driver: bridge
+                                </pre>
+                            </div>
+                        </div>
+                        
+                        <div id="k8s-manifests" class="tab-content">
+                            <div class="code-block">
+                                <pre>
+# kubernetes/user-service-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+  namespace: ecommerce
+  labels:
+    app: user-service
+    version: v1.0.0
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+        version: v1.0.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3001"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: ecommerce-app
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        fsGroup: 1001
+      containers:
+      - name: user-service
+        image: your-registry.com/ecommerce/user-service:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3001
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: PORT
+          value: "3001"
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: host
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: password
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: jwt-secret
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3001
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 3001
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        - name: cache
+          mountPath: /app/.cache
+      volumes:
+      - name: tmp
+        emptyDir: {}
+      - name: cache
+        emptyDir: {}
+      imagePullSecrets:
+      - name: registry-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+  namespace: ecommerce
+  labels:
+    app: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+  - name: http
+    port: 80
+    targetPort: 3001
+    protocol: TCP
+  type: ClusterIP
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: user-service-hpa
+  namespace: ecommerce
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: user-service
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+      - type: Pods
+        value: 2
+        periodSeconds: 60
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Infrastructure Section -->
+        <div id="infrastructure" class="section hidden">
+            <h2>🌐 Infrastructure as Code</h2>
+            
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card__body">
+                        <h4>🏗️ Terraform (AWS Infrastructure)</h4>
+                        <p>Automated provisioning and management of cloud resources</p>
+                        <ul>
+                            <li><strong>VPC:</strong> Multi-AZ network with public/private subnets</li>
+                            <li><strong>EKS Cluster:</strong> Managed Kubernetes with worker nodes</li>
+                            <li><strong>RDS Instances:</strong> Managed databases with backups</li>
+                            <li><strong>ALB:</strong> Application Load Balancer with SSL termination</li>
+                            <li><strong>S3 Buckets:</strong> Storage for static assets and backups</li>
+                            <li><strong>IAM:</strong> Roles, policies, and service accounts</li>
+                            <li><strong>Route53:</strong> DNS management and health checks</li>
+                            <li><strong>CloudWatch:</strong> Logging and monitoring integration</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card__body">
+                        <h4>⚙️ Ansible (Configuration Management)</h4>
+                        <p>Automated server configuration and application deployment</p>
+                        <ul>
+                            <li><strong>Server Hardening:</strong> Security configurations and updates</li>
+                            <li><strong>Docker Setup:</strong> Container runtime and daemon configuration</li>
+                            <li><strong>Kubernetes:</strong> Cluster initialization and node joining</li>
+                            <li><strong>Monitoring Tools:</strong> Prometheus, Grafana, and ELK deployment</li>
+                            <li><strong>Security Tools:</strong> SonarQube, Trivy, and Vault setup</li>
+                            <li><strong>Application Deploy:</strong> Service deployment automation</li>
+                            <li><strong>Environment Config:</strong> Variable and secret management</li>
+                            <li><strong>Backup Automation:</strong> Scheduled backup and restore procedures</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-24">
+                <div class="card__body">
+                    <h3>📂 Infrastructure Configuration Examples</h3>
+                    <div class="tab-container">
+                        <div class="tabs">
+                            <button class="tab active" onclick="showTab('terraform-main')">Terraform Main</button>
+                            <button class="tab" onclick="showTab('terraform-vpc')">VPC Module</button>
+                            <button class="tab" onclick="showTab('ansible-playbook')">Ansible Playbook</button>
+                            <button class="tab" onclick="showTab('helm-chart')">Helm Chart</button>
+                        </div>
+                        
+                        <div id="terraform-main" class="tab-content active">
+                            <div class="code-block">
+                                <pre>
+# infrastructure/terraform/main.tf
+terraform {
+  required_version = ">= 1.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.23"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2.11"
+    }
+  }
+  
+  backend "s3" {
+    bucket         = "ecommerce-terraform-state"
+    key            = "production/terraform.tfstate"
+    region         = "us-west-2"
+    encrypt        = true
+    dynamodb_table = "terraform-locks"
+  }
+}
+
+provider "aws" {
+  region = var.aws_region
+  
+  default_tags {
+    tags = {
+      Project     = var.project_name
+      Environment = var.environment
+      ManagedBy   = "Terraform"
+      Owner       = "DevOps Team"
+    }
+  }
+}
+
+# Data sources
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
+data "aws_caller_identity" "current" {}
+
+# Local values
+locals {
+  cluster_name = "${var.project_name}-${var.environment}"
+  common_tags = {
+    Project     = var.project_name
+    Environment = var.environment
+    ManagedBy   = "Terraform"
+  }
+}
+
+# VPC Module
+module "vpc" {
+  source = "./modules/vpc"
+  
+  project_name       = var.project_name
+  environment        = var.environment
+  vpc_cidr          = var.vpc_cidr
+  availability_zones = data.aws_availability_zones.available.names
+  
+  tags = local.common_tags
+}
+
+# EKS Module
+module "eks" {
+  source = "./modules/eks"
+  
+  cluster_name       = local.cluster_name
+  cluster_version    = var.eks_version
+  vpc_id            = module.vpc.vpc_id
+  subnet_ids        = module.vpc.private_subnet_ids
+  
+  node_groups = {
+    main = {
+      instance_types = var.node_instance_types
+      capacity_type  = "ON_DEMAND"
+      min_size      = var.min_capacity
+      max_size      = var.max_capacity
+      desired_size  = var.desired_capacity
+      
+      k8s_labels = {
+        Environment = var.environment
+        NodeGroup   = "main"
+      }
+    }
+    
+    spot = {
+      instance_types = ["t3.medium", "t3.large"]
+      capacity_type  = "SPOT"
+      min_size      = 0
+      max_size      = 5
+      desired_size  = 0
+      
+      k8s_labels = {
+        Environment = var.environment
+        NodeGroup   = "spot"
+      }
+      
+      taints = [{
+        key    = "spot-instance"
+        value  = "true"
+        effect = "NO_SCHEDULE"
+      }]
+    }
+  }
+  
+  tags = local.common_tags
+}
+
+# RDS Module
+module "rds" {
+  source = "./modules/rds"
+  
+  project_name = var.project_name
+  environment  = var.environment
+  vpc_id      = module.vpc.vpc_id
+  subnet_ids  = module.vpc.private_subnet_ids
+  
+  databases = {
+    users = {
+      engine         = "postgres"
+      engine_version = "15.4"
+      instance_class = var.db_instance_class
+      allocated_storage = var.db_allocated_storage
+      database_name  = "ecommerce_users"
+      port          = 5432
+    }
+    
+    products = {
+      engine         = "postgres"
+      engine_version = "15.4"
+      instance_class = var.db_instance_class
+      allocated_storage = var.db_allocated_storage
+      database_name  = "ecommerce_products"
+      port          = 5432
+    }
+    
+    orders = {
+      engine         = "mysql"
+      engine_version = "8.0.35"
+      instance_class = var.db_instance_class
+      allocated_storage = var.db_allocated_storage
+      database_name  = "ecommerce_orders"
+      port          = 3306
+    }
+  }
+  
+  tags = local.common_tags
+}
+
+# ALB Module
+module "alb" {
+  source = "./modules/alb"
+  
+  name           = "${var.project_name}-${var.environment}"
+  vpc_id         = module.vpc.vpc_id
+  subnet_ids     = module.vpc.public_subnet_ids
+  certificate_arn = var.ssl_certificate_arn
+  
+  tags = local.common_tags
+}
+
+# S3 Buckets
+resource "aws_s3_bucket" "app_storage" {
+  bucket = "${var.project_name}-${var.environment}-storage"
+  
+  tags = local.common_tags
+}
+
+resource "aws_s3_bucket_versioning" "app_storage_versioning" {
+  bucket = aws_s3_bucket.app_storage.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "app_storage_encryption" {
+  bucket = aws_s3_bucket.app_storage.id
+  
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+    bucket_key_enabled = true
+  }
+}
+
+# CloudWatch Log Groups
+resource "aws_cloudwatch_log_group" "app_logs" {
+  for_each = toset(["user-service", "product-service", "order-service"])
+  
+  name              = "/aws/eks/${local.cluster_name}/${each.key}"
+  retention_in_days = 30
+  
+  tags = local.common_tags
+}
+
+# Outputs
+output "vpc_id" {
+  description = "VPC ID"
+  value       = module.vpc.vpc_id
+}
+
+output "eks_cluster_name" {
+  description = "EKS cluster name"
+  value       = module.eks.cluster_name
+}
+
+output "eks_cluster_endpoint" {
+  description = "EKS cluster endpoint"
+  value       = module.eks.cluster_endpoint
+  sensitive   = true
+}
+
+output "rds_endpoints" {
+  description = "RDS instance endpoints"
+  value       = module.rds.db_endpoints
+  sensitive   = true
+}
+
+output "alb_dns_name" {
+  description = "Application Load Balancer DNS name"
+  value       = module.alb.dns_name
+}
+                                </pre>
+                            </div>
+                        </div>
+                        
+                        <div id="terraform-vpc" class="tab-content">
+                            <div class="code-block">
+                                <pre>
+# infrastructure/terraform/modules/vpc/main.tf
+resource "aws_vpc" "main" {
+  cidr_block           = var.vpc_cidr
+  enable_dns_hostnames = true
+  enable_dns_support   = true
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-vpc"
+    "kubernetes.io/cluster/${var.project_name}-${var.environment}" = "shared"
+  })
+}
+
+# Internet Gateway
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-igw"
+  })
+}
+
+# Public Subnets
+resource "aws_subnet" "public" {
+  count = length(var.availability_zones)
+  
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = cidrsubnet(var.vpc_cidr, 8, count.index)
+  availability_zone       = var.availability_zones[count.index]
+  map_public_ip_on_launch = true
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-public-${var.availability_zones[count.index]}"
+    Type = "Public"
+    "kubernetes.io/cluster/${var.project_name}-${var.environment}" = "shared"
+    "kubernetes.io/role/elb" = "1"
+  })
+}
+
+# Private Subnets
+resource "aws_subnet" "private" {
+  count = length(var.availability_zones)
+  
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, count.index + 10)
+  availability_zone = var.availability_zones[count.index]
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-private-${var.availability_zones[count.index]}"
+    Type = "Private"
+    "kubernetes.io/cluster/${var.project_name}-${var.environment}" = "owned"
+    "kubernetes.io/role/internal-elb" = "1"
+  })
+}
+
+# Database Subnets
+resource "aws_subnet" "database" {
+  count = length(var.availability_zones)
+  
+  vpc_id            = aws_vpc.main.id
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, count.index + 20)
+  availability_zone = var.availability_zones[count.index]
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-database-${var.availability_zones[count.index]}"
+    Type = "Database"
+  })
+}
+
+# Elastic IPs for NAT Gateways
+resource "aws_eip" "nat" {
+  count = length(var.availability_zones)
+  
+  domain = "vpc"
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-nat-eip-${count.index + 1}"
+  })
+  
+  depends_on = [aws_internet_gateway.main]
+}
+
+# NAT Gateways
+resource "aws_nat_gateway" "main" {
+  count = length(var.availability_zones)
+  
+  allocation_id = aws_eip.nat[count.index].id
+  subnet_id     = aws_subnet.public[count.index].id
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-nat-${var.availability_zones[count.index]}"
+  })
+  
+  depends_on = [aws_internet_gateway.main]
+}
+
+# Route Tables - Public
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+  
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.main.id
+  }
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-public-rt"
+  })
+}
+
+# Route Tables - Private
+resource "aws_route_table" "private" {
+  count = length(var.availability_zones)
+  
+  vpc_id = aws_vpc.main.id
+  
+  route {
+    cidr_block     = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.main[count.index].id
+  }
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-private-rt-${var.availability_zones[count.index]}"
+  })
+}
+
+# Route Tables - Database
+resource "aws_route_table" "database" {
+  vpc_id = aws_vpc.main.id
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-database-rt"
+  })
+}
+
+# Route Table Associations
+resource "aws_route_table_association" "public" {
+  count = length(aws_subnet.public)
+  
+  subnet_id      = aws_subnet.public[count.index].id
+  route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route_table_association" "private" {
+  count = length(aws_subnet.private)
+  
+  subnet_id      = aws_subnet.private[count.index].id
+  route_table_id = aws_route_table.private[count.index].id
+}
+
+resource "aws_route_table_association" "database" {
+  count = length(aws_subnet.database)
+  
+  subnet_id      = aws_subnet.database[count.index].id
+  route_table_id = aws_route_table.database.id
+}
+
+# Database Subnet Group
+resource "aws_db_subnet_group" "main" {
+  name       = "${var.project_name}-${var.environment}-db-subnet-group"
+  subnet_ids = aws_subnet.database[*].id
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-db-subnet-group"
+  })
+}
+
+# VPC Endpoints for S3 and ECR
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id       = aws_vpc.main.id
+  service_name = "com.amazonaws.${data.aws_region.current.name}.s3"
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-s3-endpoint"
+  })
+}
+
+resource "aws_vpc_endpoint" "ecr_dkr" {
+  vpc_id              = aws_vpc.main.id
+  service_name        = "com.amazonaws.${data.aws_region.current.name}.ecr.dkr"
+  vpc_endpoint_type   = "Interface"
+  subnet_ids          = aws_subnet.private[*].id
+  security_group_ids  = [aws_security_group.vpc_endpoints.id]
+  
+  private_dns_enabled = true
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-ecr-dkr-endpoint"
+  })
+}
+
+# Security Group for VPC Endpoints
+resource "aws_security_group" "vpc_endpoints" {
+  name_prefix = "${var.project_name}-${var.environment}-vpc-endpoints"
+  vpc_id      = aws_vpc.main.id
+  
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr]
+  }
+  
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  
+  tags = merge(var.tags, {
+    Name = "${var.project_name}-${var.environment}-vpc-endpoints-sg"
+  })
+}
+
+data "aws_region" "current" {}
+                                </pre>
+                            </div>
+                        </div>
+                        
+                        <div id="ansible-playbook" class="tab-content">
+                            <div class="code-block">
+                                <pre>
+# infrastructure/ansible/playbooks/site.yml
+---
+- name: Complete E-commerce Infrastructure Setup
+  hosts: all
+  become: yes
+  gather_facts: yes
+  
+  vars:
+    project_name: ecommerce
+    environment: "{{ env | default('development') }}"
+    docker_version: "24.0"
+    kubernetes_version: "1.28"
+    
+  pre_tasks:
+    - name: Update system packages
+      package:
+        name: "*"
+        state: latest
+      when: ansible_os_family == "RedHat"
+    
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_os_family == "Debian"
+    
+    - name: Install common packages
+      package:
+        name:
+          - curl
+          - wget
+          - unzip
+          - git
+          - htop
+          - vim
+          - jq
+        state: present
+  
+  roles:
+    - role: security-hardening
+      tags: [security, hardening]
+    
+    - role: docker
+      tags: [docker, containers]
+      vars:
+        docker_users:
+          - "{{ ansible_user }}"
+        docker_daemon_options:
+          log-driver: "json-file"
+          log-opts:
+            max-size: "10m"
+            max-file: "3"
+          storage-driver: "overlay2"
+    
+    - role: kubernetes
+      tags: [kubernetes, k8s]
+      when: "'k8s' in group_names"
+    
+    - role: monitoring
+      tags: [monitoring, observability]
+      when: "'monitoring' in group_names"
+    
+    - role: logging
+      tags: [logging, elk]
+      when: "'logging' in group_names"
+    
+    - role: security-tools
+      tags: [security, tools]
+      when: "'security' in group_names"
+  
+  post_tasks:
+    - name: Verify Docker installation
+      command: docker --version
+      register: docker_version_output
+      changed_when: false
+    
+    - name: Display Docker version
+      debug:
+        msg: "Docker version: {{ docker_version_output.stdout }}"
+    
+    - name: Verify Kubernetes installation
+      command: kubectl version --client
+      register: kubectl_version_output
+      changed_when: false
+      when: "'k8s' in group_names"
+    
+    - name: Display kubectl version
+      debug:
+        msg: "Kubectl version: {{ kubectl_version_output.stdout }}"
+      when: "'k8s' in group_names"
+
+# infrastructure/ansible/roles/docker/tasks/main.yml
+---
+- name: Add Docker official GPG key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Add Docker repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install Docker CE
+  package:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+
+- name: Create docker daemon configuration directory
+  file:
+    path: /etc/docker
+    state: directory
+    mode: '0755'
+
+- name: Configure Docker daemon
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+    backup: yes
+  notify: restart docker
+
+- name: Start and enable Docker service
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+    daemon_reload: yes
+
+- name: Add users to docker group
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  loop: "{{ docker_users }}"
+  when: docker_users is defined
+
+- name: Install Docker Compose (standalone)
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/v2.21.0/docker-compose-linux-x86_64"
+    dest: /usr/local/bin/docker-compose
+    mode: '0755'
+
+- name: Verify Docker installation
+  command: docker run hello-world
+  register: docker_test
+  changed_when: false
+  become_user: "{{ ansible_user }}"
+
+# infrastructure/ansible/roles/kubernetes/tasks/main.yml
+---
+- name: Add Kubernetes apt key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Add Kubernetes apt repository
+  apt_repository:
+    repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install Kubernetes components
+  package:
+    name:
+      - kubelet={{ kubernetes_version }}-00
+      - kubeadm={{ kubernetes_version }}-00
+      - kubectl={{ kubernetes_version }}-00
+    state: present
+    allow_downgrade: yes
+
+- name: Hold Kubernetes packages
+  dpkg_selections:
+    name: "{{ item }}"
+    selection: hold
+  loop:
+    - kubelet
+    - kubeadm
+    - kubectl
+  when: ansible_os_family == "Debian"
+
+- name: Configure kubelet
+  template:
+    src: kubelet.j2
+    dest: /etc/default/kubelet
+  notify: restart kubelet
+
+- name: Enable kubelet service
+  systemd:
+    name: kubelet
+    enabled: yes
+    daemon_reload: yes
+
+- name: Install Helm
+  unarchive:
+    src: "https://get.helm.sh/helm-v3.12.0-linux-amd64.tar.gz"
+    dest: /tmp
+    remote_src: yes
+    creates: /tmp/linux-amd64/helm
+
+- name: Copy Helm binary
+  copy:
+    src: /tmp/linux-amd64/helm
+    dest: /usr/local/bin/helm
+    mode: '0755'
+    remote_src: yes
+
+- name: Create kubeconfig directory
+  file:
+    path: "{{ ansible_user_dir }}/.kube"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+  become_user: "{{ ansible_user }}"
+
+# infrastructure/ansible/inventories/production/hosts.yml
+all:
+  children:
+    k8s_cluster:
+      children:
+        kube_control_plane:
+          hosts:
+            master-01:
+              ansible_host: 10.0.1.10
+              ip: 10.0.1.10
+            master-02:
+              ansible_host: 10.0.1.11
+              ip: 10.0.1.11
+            master-03:
+              ansible_host: 10.0.1.12
+              ip: 10.0.1.12
+        kube_node:
+          hosts:
+            worker-01:
+              ansible_host: 10.0.2.10
+              ip: 10.0.2.10
+            worker-02:
+              ansible_host: 10.0.2.11
+              ip: 10.0.2.11
+            worker-03:
+              ansible_host: 10.0.2.12
+              ip: 10.0.2.12
+        etcd:
+          hosts:
+            master-01:
+            master-02:
+            master-03:
+    
+    monitoring:
+      hosts:
+        monitoring-01:
+          ansible_host: 10.0.3.10
+          prometheus_role: server
+          grafana_role: server
+    
+    logging:
+      hosts:
+        logging-01:
+          ansible_host: 10.0.3.20
+          elasticsearch_role: master
+        logging-02:
+          ansible_host: 10.0.3.21
+          elasticsearch_role: data
+        logging-03:
+          ansible_host: 10.0.3.22
+          elasticsearch_role: data
+    
+    security:
+      hosts:
+        security-01:
+          ansible_host: 10.0.3.30
+          sonarqube_role: server
+          vault_role: server
+
+  vars:
+    ansible_user: ubuntu
+    ansible_ssh_private_key_file: ~/.ssh/ecommerce-prod.pem
+    ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+                                </pre>
+                            </div>
+                        </div>
+                        
+                        <div id="helm-chart" class="tab-content">
+                            <div class="code-block">
+                                <pre>
+# infrastructure/kubernetes/helm-charts/ecommerce/Chart.yaml
+apiVersion: v2
+name: ecommerce
+description: A Helm chart for E-commerce Microservices
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+
+home: https://github.com/your-org/ecommerce-devops
+sources:
+  - https://github.com/your-org/ecommerce-devops
+
+maintainers:
+  - name: DevOps Team
+    email: devops@yourcompany.com
+
+keywords:
+  - ecommerce
+  - microservices
+  - kubernetes
+  - nodejs
+  - python
+
+dependencies:
+  - name: mongodb
+    version: "13.15.1"
+    repository: https://charts.bitnami.com/bitnami
+    condition: mongodb.enabled
+  
+  - name: postgresql
+    version: "12.8.2"
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled
+  
+  - name: mysql
+    version: "9.12.1"
+    repository: https://charts.bitnami.com/bitnami
+    condition: mysql.enabled
+
+# infrastructure/kubernetes/helm-charts/ecommerce/values.yaml
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+  storageClass: ""
+  
+  # Common labels
+  labels:
+    app.kubernetes.io/name: ecommerce
+    app.kubernetes.io/instance: ecommerce
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+
+# Application configuration
+app:
+  name: ecommerce
+  version: "1.0.0"
+  environment: production
+
+# Namespace configuration
+namespace:
+  create: true
+  name: ecommerce
+  labels:
+    name: ecommerce
+    environment: production
+
+# Service Account
+serviceAccount:
+  create: true
+  name: ecommerce-app
+  annotations: {}
+  automount: true
+
+# User Service Configuration
+userService:
+  enabled: true
+  replicaCount: 3
+  
+  image:
+    repository: your-registry.com/ecommerce/user-service
+    tag: "latest"
+    pullPolicy: Always
+  
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 3001
+    annotations: {}
+  
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+    hosts:
+      - host: api.ecommerce.yourdomain.com
+        paths:
+          - path: /api/users
+            pathType: Prefix
+          - path: /api/auth
+            pathType: Prefix
+    tls:
+      - secretName: ecommerce-api-tls
+        hosts:
+          - api.ecommerce.yourdomain.com
+  
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+  
+  autoscaling:
+    enabled: true
+    minReplicas: 3
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 80
+  
+  env:
+    NODE_ENV: production
+    PORT: "3001"
+    LOG_LEVEL: info
+  
+  secrets:
+    DB_HOST: mongodb-headless.ecommerce.svc.cluster.local
+    DB_USER: ecommerce
+    DB_PASSWORD: "{{ .Values.mongodb.auth.password }}"
+    JWT_SECRET: "your-jwt-secret-key"
+  
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: 3001
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+  
+  readinessProbe:
+    httpGet:
+      path: /ready
+      port: 3001
+    initialDelaySeconds: 10
+    periodSeconds: 5
+    timeoutSeconds: 3
+    failureThreshold: 3
+
+# Product Service Configuration
+productService:
+  enabled: true
+  replicaCount: 3
+  
+  image:
+    repository: your-registry.com/ecommerce/product-service
+    tag: "latest"
+    pullPolicy: Always
+  
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 3002
+  
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "250m"
+    limits:
+      memory: "1Gi"
+      cpu: "500m"
+  
+  autoscaling:
+    enabled: true
+    minReplicas: 3
+    maxReplicas: 15
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 80
+  
+  env:
+    FLASK_ENV: production
+    PORT: "3002"
+    LOG_LEVEL: info
+  
+  secrets:
+    DATABASE_URL: "postgresql://ecommerce:{{ .Values.postgresql.auth.password }}@postgresql-headless.ecommerce.svc.cluster.local:5432/ecommerce_products"
+
+# Order Service Configuration
+orderService:
+  enabled: true
+  replicaCount: 3
+  
+  image:
+    repository: your-registry.com/ecommerce/order-service
+    tag: "latest"
+    pullPolicy: Always
+  
+  service:
+    type: ClusterIP
+    port: 80
+    targetPort: 3003
+  
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+  
+  autoscaling:
+    enabled: true
+    minReplicas: 3
+    maxReplicas: 12
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 80
+  
+  env:
+    NODE_ENV: production
+    PORT: "3003"
+    LOG_LEVEL: info
+  
+  secrets:
+    DB_HOST: mysql-headless.ecommerce.svc.cluster.local
+    DB_USER: ecommerce
+    DB_PASSWORD: "{{ .Values.mysql.auth.password }}"
+    DB_NAME: ecommerce_orders
+
+# Database Configurations
+mongodb:
+  enabled: true
+  architecture: replicaset
+  replicaCount: 3
+  auth:
+    enabled: true
+    rootPassword: "your-mongodb-root-password"
+    username: ecommerce
+    password: "your-mongodb-password"
+    database: ecommerce_users
+  persistence:
+    enabled: true
+    size: 20Gi
+    storageClass: gp3
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 250m
+    limits:
+      memory: 1Gi
+      cpu: 500m
+
+postgresql:
+  enabled: true
+  architecture: standalone
+  auth:
+    postgresPassword: "your-postgres-password"
+    username: ecommerce
+    password: "your-postgres-user-password"
+    database: ecommerce_products
+  persistence:
+    enabled: true
+    size: 20Gi
+    storageClass: gp3
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 250m
+    limits:
+      memory: 1Gi
+      cpu: 500m
+
+mysql:
+  enabled: true
+  architecture: standalone
+  auth:
+    rootPassword: "your-mysql-root-password"
+    username: ecommerce
+    password: "your-mysql-password"
+    database: ecommerce_orders
+  persistence:
+    enabled: true
+    size: 20Gi
+    storageClass: gp3
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 250m
+    limits:
+      memory: 1Gi
+      cpu: 500m
+
+# Network Policies
+networkPolicies:
+  enabled: true
+  
+# Pod Security Policies
+podSecurityPolicies:
+  enabled: true
+  
+# Service Monitor for Prometheus
+serviceMonitor:
+  enabled: true
+  namespace: monitoring
+  labels:
+    app: ecommerce
+  interval: 30s
+  scrapeTimeout: 10s
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional sections would continue here... -->
+        <!-- For brevity, I'm including placeholder divs for the remaining sections -->
+        
+        <div id="cicd" class="section hidden">
+            <h2>🔄 CI/CD Pipeline Implementation</h2>
+            <div class="card">
+                <div class="card__body">
+                    <p>Complete CI/CD pipeline documentation with Jenkins and GitHub Actions configurations, automated testing, security scanning, and deployment automation.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="monitoring" class="section hidden">
+            <h2>📊 Monitoring & Observability Stack</h2>
+            <div class="card">
+                <div class="card__body">
+                    <p>Comprehensive monitoring setup with Prometheus metrics, Grafana dashboards, ELK logging stack, and alerting configurations.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="security" class="section hidden">
+            <h2>🔒 Security & Compliance Framework</h2>
+            <div class="card">
+                <div class="card__body">
+                    <p>Security implementation including SonarQube code analysis, Trivy vulnerability scanning, OWASP security testing, and HashiCorp Vault secrets management.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="setup" class="section hidden">
+            <h2>🚀 Complete Setup & Deployment Guide</h2>
+            <div class="card">
+                <div class="card__body">
+                    <p>Step-by-step deployment guide including prerequisites, environment setup, infrastructure provisioning, application deployment, and troubleshooting procedures.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Update URL hash
+            window.location.hash = sectionId;
+        }
+        
+        function showTab(tabId) {
+            // Find the parent tab container
+            const tabContent = document.getElementById(tabId);
+            if (!tabContent) return;
+            
+            const tabContainer = tabContent.closest('.tab-container');
+            if (!tabContainer) return;
+            
+            // Hide all tab content in this container
+            const allTabContent = tabContainer.querySelectorAll('.tab-content');
+            allTabContent.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs in this container
+            const allTabs = tabContainer.querySelectorAll('.tab');
+            allTabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            tabContent.classList.add('active');
+            
+            // Add active class to clicked tab
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+        }
+        
+        // Handle initial hash navigation
+        window.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showSection(hash);
+            } else {
+                showSection('overview');
+            }
+        });
+        
+        // Handle hash changes (back/forward navigation)
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showSection(hash);
+            }
+        });
+    </script>
+</body>
+</html>
